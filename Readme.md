@@ -3,7 +3,10 @@
 + Pending: FedISM (Shared Model + Balanced CSM)
 + Future: FedProx, FedNova, Scaffold
 
-
+# Clone repo
+```
+git clone https://github.com/huihui0310tt/Federated-Learning.git
+```
 
 
 # Environment
