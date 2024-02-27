@@ -4,8 +4,18 @@
 + Future: FedProx, FedNova, Scaffold
 
 # Clone repo
-```
+```bash
 git clone https://github.com/huihui0310tt/Federated-Learning.git
+```
+``` bash
+nano configure.json
+nano command.sh
+
+chmod +x createnew.sh
+chmod +x command.sh
+
+./createnew.sh
+./command.sh
 ```
 
 
