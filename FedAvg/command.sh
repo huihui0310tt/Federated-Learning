@@ -1,12 +1,16 @@
 #!/bin/bash
 
 
-
+# e.g. CIFAR-FedAvg-IID
 TaskName="CIFAR10-"
-rounds=2
-epochs=2
+rounds=100
+epochs=5
+# CIFAR-10=0.1, COVID=0.001
 lr=0.1
-batch_size=256
+
+batch_size=64
+
+# cuda:0 or cuda:1
 CUDA_Name="cuda:0"
 
 
