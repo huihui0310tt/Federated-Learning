@@ -8,6 +8,7 @@
 git clone https://github.com/huihui0310tt/Federated-Learning.git
 ```
 ``` bash
+# cd origindata
 nano configure.json
 nano command.sh
 
