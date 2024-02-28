@@ -39,7 +39,7 @@ class Aggregator:
         return metrics
 
 
-    def merge(self, clients, no_cuda, gpu_devicename):
+    def merge(self, clients, batch_size, num_classes, no_cuda, gpu_devicename):
         # weights = [torch.load(m['path'], 'cpu') for m in models]
         weights = [client.model for client in clients]
         
@@ -64,11 +64,11 @@ class Aggregator:
                                                             transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
                                                         ]))
         test_loader = torch.utils.data.DataLoader(test_data,
-                                                batch_size=64,
+                                                batch_size=batch_size,
                                                 shuffle=False,
                                                 **kwargs)
 
-        model = resnet18(pretrained=False).to(device)
+        model = resnet18(num_classes=num_classes).to(device)
         model.load_state_dict(copy.deepcopy(merged))
         metrics = self.__test(model, device, test_loader)
         print(metrics)
