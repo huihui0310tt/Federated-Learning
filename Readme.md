@@ -11,6 +11,7 @@ git clone https://github.com/huihui0310tt/Federated-Learning.git
 # cd origindata
 nano configure.json
 nano command.sh
+nano net.py (num_classes)
 
 chmod +x createnew.sh
 chmod +x command.sh
