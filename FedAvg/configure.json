@@ -1,6 +1,5 @@
 
-{"//Comment": "Please choose one of templates(CIFAR10, COVID)"
-}
+{"//Comment": "Please choose one of templates(CIFAR10, COVID)"}
 
 {
 	"User": ["edge1", "edge2", "edge3", "edge4", "edge5", "edge6", "edge7", "edge8", "edge9", "edge10"],

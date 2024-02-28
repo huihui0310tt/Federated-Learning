@@ -60,7 +60,8 @@ class Client:
         return metrics
 
 
-    def train(self, epochs, global_model, lr, batch_size, no_cuda, gpu_devicename):
+
+    def train(self, epochs, global_model, lr, batch_size, num_classes, no_cuda, gpu_devicename):
 
         seed = 1
 
@@ -95,7 +96,7 @@ class Client:
             shuffle=True,
             **kwargs)
 
-        model = resnet18().to(device)
+        model = resnet18(num_classes=num_classes).to(device)
         # model = vgg16().to(device)
         optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=0.9, weight_decay=1e-4)
         # optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=0 )

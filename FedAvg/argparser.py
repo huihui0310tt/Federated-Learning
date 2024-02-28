@@ -30,5 +30,5 @@ def get_arg():
         no_cuda = False
 
 
-    return args.TaskName, user_list, args.rounds, args.epochs, args.lr, args.batch_size, global_model, no_cuda, args.CUDA_Name
+    return args.TaskName, user_list, args.rounds, args.epochs, args.lr, args.batch_size, global_model, len(DataCategory), no_cuda, args.CUDA_Name
 
