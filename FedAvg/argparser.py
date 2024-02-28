@@ -8,6 +8,7 @@ def get_arg():
     with open('configure.json', 'r') as file:
         json_data = json.load(file)
     user_list = json_data['User']  # Client
+    DataCategory = json_data["DataCategory"]
 
 
     parser = argparse.ArgumentParser()
