@@ -1,6 +1,11 @@
 # Centralized Learning (Traditional Machine Learning)
 
 
+``` bash
+git clone https://github.com/huihui0310tt/Federated-Learning/ --depth 1 --branch main --single-branch Centralized-Learning
+```
+
+
 
 ``` bash
 check origindata
