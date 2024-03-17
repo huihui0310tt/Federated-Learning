@@ -11,7 +11,7 @@ from torchvision import datasets, transforms
 
 import copy
 # from net import resnet18
-from torchvision.models import vgg16, resnet18, mobilenet_v2, alexnet, googlenet
+from torchvision.models import vgg11, resnet18, mobilenet_v2, alexnet, googlenet
 
 
 class Aggregator:
@@ -81,8 +81,8 @@ class Aggregator:
 
         if modelname == 'ResNet18':
             model = resnet18(num_classes=num_classes, pretrained=False).to(device)
-        elif modelname == 'VGG16':
-            model = vgg16(num_classes=num_classes, pretrained=False).to(device)
+        elif modelname == 'VGG11':
+            model = vgg11(num_classes=num_classes, pretrained=False).to(device)
         elif modelname == 'MobileNet_v2':
             model = mobilenet_v2(num_classes=num_classes, pretrained=False).to(device)
         elif modelname =='AlexNet':

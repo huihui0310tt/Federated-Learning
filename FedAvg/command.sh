@@ -8,7 +8,7 @@ epochs=5
 # CIFAR-10=0.1, COVID=0.001
 lr=0.1
 
-# model= "ResNet18", "VGG16", "MobileNet_v2", "AlexNet", "GoogleNet"
+# model= "ResNet18", "VGG11", "MobileNet_v2", "AlexNet", "GoogleNet"
 model="ResNet18"
 
 #Data= "CIFAR" or "COVID"
