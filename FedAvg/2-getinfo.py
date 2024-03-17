@@ -33,24 +33,24 @@ def main():
 
     # 從配置中獲取使用者名稱和子目錄
     users = config["User"]
+    users.append('test')
     subdirectories = config["DataCategory"]
 
     # 儲存結果的字典，以子目錄為鍵，使用者為值
     results = {}
 
     # 遍歷每個使用者目錄並儲存結果
-    for user_directory in users:
-        # 提取使用者編號，假設使用者目錄名稱的格式為 "edgeN"
-        user_number = user_directory.split("edge")[-1]
+    for user in users:
         for sub_directory in subdirectories:
-            sub_directory_path = path.join(base_directory, user_directory, sub_directory)
+            sub_directory_path = path.join(base_directory, user, sub_directory)
             if path.isdir(sub_directory_path):
                 sub_directory_file_count = count_files_in_directory(sub_directory_path)
                 # 檢查子目錄是否已經存在於字典中，如果不存在，則創建一個新的空列表
                 if sub_directory not in results:
                     results[sub_directory] = [None] * len(users)
                 # 在子目錄對應的列表中的使用者位置儲存檔案數量
-                results[sub_directory][int(user_number) - 1] = sub_directory_file_count
+                user_index = users.index(user)
+                results[sub_directory][user_index] = sub_directory_file_count
 
     # 將字典轉換成列表形式，以便 tabulate 函式使用
     table_data = [[sub_directory] + file_counts for sub_directory, file_counts in results.items()]

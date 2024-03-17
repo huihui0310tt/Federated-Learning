@@ -77,7 +77,7 @@ class Aggregator:
                                                 shuffle=False,
                                                 **kwargs)
         model = None
-        # modelname : "ResNet18", "VGG16", "MobileNet_v2"
+        # modelname : "ResNet18", "VGG16", "MobileNet_v2", "AlexNet"
 
         if modelname == 'ResNet18':
             model = resnet18(num_classes=num_classes, pretrained=False).to(device)
@@ -85,6 +85,8 @@ class Aggregator:
             model = vgg16(num_classes=num_classes, pretrained=False).to(device)
         elif modelname == 'MobileNet_v2':
             model = mobilenet_v2(num_classes=num_classes, pretrained=False).to(device)
+        elif modelname =='AlexNet':
+            model = alexnet(num_classes=num_classes, pretrained=False).to(device)
         # model = resnet18(num_classes=num_classes).to(device)
         model.load_state_dict(copy.deepcopy(merged))
         metrics = self.__test(model, device, test_loader)

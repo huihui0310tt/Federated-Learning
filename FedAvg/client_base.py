@@ -115,7 +115,7 @@ class Client:
             **kwargs)
 
         model = None
-        # modelname : "ResNet18", "VGG16", "MobileNet_v2"
+        # modelname : "ResNet18", "VGG16", "MobileNet_v2", "AlexNet"
 
         if modelname == 'ResNet18':
             model = resnet18(num_classes=num_classes, pretrained=False).to(device)
@@ -123,6 +123,8 @@ class Client:
             model = vgg16(num_classes=num_classes, pretrained=False).to(device)
         elif modelname == 'MobileNet_v2':
             model = mobilenet_v2(num_classes=num_classes, pretrained=False).to(device)
+        elif modelname =='AlexNet':
+            model = alexnet(num_classes=num_classes, pretrained=False).to(device)
         #model = resnet18(num_classes=num_classes).to(device)
         # model = vgg16().to(device)
         optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=0.9, weight_decay=1e-4)
