@@ -10,7 +10,8 @@ from torchvision import datasets, transforms
 
 
 import copy
-from net import resnet18
+# from net import resnet18
+from torchvision.models import vgg11, resnet18, mobilenet_v2, alexnet, googlenet
 
 
 class Aggregator:
@@ -39,7 +40,7 @@ class Aggregator:
         return metrics
 
 
-    def merge(self, clients, batch_size, num_classes, no_cuda, gpu_devicename):
+    def merge(self, clients, modelname, dataset, batch_size, num_classes, no_cuda, gpu_devicename):
         # weights = [torch.load(m['path'], 'cpu') for m in models]
         weights = [client.model for client in clients]
         
@@ -58,18 +59,39 @@ class Aggregator:
         device = torch.device( gpu_devicename if use_cuda else "cpu")
         kwargs = {'num_workers': 1, 'pin_memory': True} if use_cuda else {}
 
-        test_data = datasets.ImageFolder('./data/test',
-                                        transforms.Compose([transforms.Resize((128, 128)),
-                                                            transforms.ToTensor(),
-                                                            transforms.Normalize(mean=[0.4914, 0.4822, 0.4465],
-                                                                                std=[0.247, 0.243, 0.261])
-                                                        ]))
+        if dataset == 'CIFAR':
+            test_data = datasets.ImageFolder('./data/test',
+                                            transforms.Compose([transforms.Resize((128, 128)),
+                                                                transforms.ToTensor(),
+                                                                transforms.Normalize(mean=[0.4914, 0.4822, 0.4465],
+                                                                                    std=[0.247, 0.243, 0.261])
+                                                                ]))
+        elif dataset == 'COVID':
+            test_data = datasets.ImageFolder('./data/test',
+                                            transforms.Compose([transforms.Resize((224, 224)),
+                                                                transforms.ToTensor(),
+                                                                transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                                                                    std=[0.229, 0.224, 0.225])
+                                                                ]))
         test_loader = torch.utils.data.DataLoader(test_data,
                                                 batch_size=batch_size,
                                                 shuffle=False,
                                                 **kwargs)
+        
+        model = None
+        # modelname : "ResNet18", "VGG16", "MobileNet_v2", "AlexNet"
 
-        model = resnet18(num_classes=num_classes).to(device)
+        if modelname == 'ResNet18':
+            model = resnet18(num_classes=num_classes, pretrained=False).to(device)
+        elif modelname == 'VGG11':
+            model = vgg11(num_classes=num_classes, pretrained=False).to(device)
+        elif modelname == 'MobileNet_v2':
+            model = mobilenet_v2(num_classes=num_classes, pretrained=False).to(device)
+        elif modelname =='AlexNet':
+            model = alexnet(num_classes=num_classes, pretrained=False).to(device)
+        elif modelname =='GoogleNet':
+            model = googlenet(num_classes=num_classes, pretrained=False).to(device)
+        # model = resnet18(num_classes=num_classes).to(device)
         model.load_state_dict(copy.deepcopy(merged))
         metrics = self.__test(model, device, test_loader)
         print(metrics)

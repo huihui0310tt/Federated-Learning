@@ -34,6 +34,7 @@ def main():
     # 從配置中獲取使用者名稱和子目錄
     users = config["User"]
     users.insert(0,'shared')
+    users.append('test')
     subdirectories = config["DataCategory"]
 
     # 儲存結果的字典，以子目錄為鍵，使用者為值

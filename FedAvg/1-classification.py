@@ -31,6 +31,7 @@ elif DatasetName == 'COVID':
     src = '../COVID_origindata'
 #src = "./origindata"
 shared = "./data/shared"
+
 for index in range(len(des)):
     sample.append(datadistribution[index+1][des[index]])
 

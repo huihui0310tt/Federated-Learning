@@ -20,9 +20,15 @@ done
 
 python ./1-classification.py
 
+DatasetName=($(jq -r '.DatasetName' configure.json))
 
-cp -r ./origindata/test ./data
+if [ "$DatasetName" = "COVID" ]; then
+    cp -r ../COVID_origindata/test ./data
+elif [ "$DatasetName" = "CIFAR" ]; then
+    cp -r ../CIFAR_origindata/test ./data
+else
+    echo "DatasetName is neither 'COVID' nor 'CIFAR'"
+fi
+
 
 python ./2-getinfo.py "$user_names_string" "$classes_string"
-
-
