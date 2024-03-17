@@ -2,6 +2,7 @@
 {"//Comment": "Please choose one of templates(CIFAR10, COVID)"}
 
 {
+	"DatasetName": "CIFAR",
 	"User": ["edge1", "edge2", "edge3", "edge4", "edge5", "edge6", "edge7", "edge8", "edge9", "edge10"],
 	"DataCategory": ["0_airplane",  "1_automobile",  "2_bird",  "3_cat",  "4_deer",  "5_dog",  "6_frog",  "7_horse",  "8_ship",  "9_truck"],
 	"DataDistribution": [
@@ -22,6 +23,7 @@
 
 
 {
+	"DatasetName": "COVID",
 	"User": ["edge1", "edge2", "edge3", "edge4"],
 	"DataCategory": ["COVID",  "Lung_Opacity",  "Normal",  "VirtualPneumonia"],
 	"DataDistribution": [

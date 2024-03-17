@@ -10,7 +10,7 @@ import torch
 
 def federated_learning():
     ###################################################################            # Initial
-    TaskName, user_list, rounds, epochs, lr, batch_size, global_model, num_classes, no_cuda, gpu_devicename = argparser.get_arg()
+    TaskName, user_list, rounds, epochs, model, dataset, lr, batch_size, global_model, num_classes, no_cuda, gpu_devicename = argparser.get_arg()
     clients = []
     for user_name in user_list:
         clients.append(client_base.Client(user_name))
@@ -21,6 +21,8 @@ def federated_learning():
     print('user : ', user_list)
     print('round : ', rounds)
     print('epochs : ', epochs)
+    print('model', model )
+    print('dataset', dataset )
     print('lr : ', lr)
     print('batch_size : ', batch_size)
     print('global_model : ', global_model)
@@ -43,13 +45,13 @@ def federated_learning():
             if global_model is None:
                 print('global: ', global_model)
 
-            i.train(epochs, global_model, lr, batch_size, num_classes, no_cuda, gpu_devicename)
+            i.train(epochs, global_model, lr, model, dataset, batch_size, num_classes, no_cuda, gpu_devicename)
             one_round_acc_record.append(i.metrics[-1]['accuracy'])
             one_round_loss_record.append(i.metrics[-1]['loss'])
 
 
         print('---Global model---')
-        metrics, global_model = aggregator.merge(clients, batch_size, num_classes, no_cuda, gpu_devicename)
+        metrics, global_model = aggregator.merge(clients, model, dataset, batch_size, num_classes, no_cuda, gpu_devicename)
 
 
         one_round_acc_record.append(metrics['accuracy'])

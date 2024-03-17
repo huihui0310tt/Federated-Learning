@@ -15,6 +15,8 @@ def get_arg():
     parser.add_argument("--TaskName", type=str )
     parser.add_argument("--rounds", type=int )
     parser.add_argument("--epochs", type=int )
+    parser.add_argument("--model", type=str )
+    parser.add_argument("--dataset", type=str )
     parser.add_argument("--lr", type=float )
     parser.add_argument("--batch_size", type=int )
     parser.add_argument("--CUDA_Name", type=str )
@@ -31,5 +33,5 @@ def get_arg():
         no_cuda = False
 
 
-    return args.TaskName, user_list, args.rounds, args.epochs, args.lr, args.batch_size, global_model, len(DataCategory), no_cuda, args.CUDA_Name
+    return args.TaskName, user_list, args.rounds, args.epochs, args.model, args.dataset, args.lr, args.batch_size, global_model, len(DataCategory), no_cuda, args.CUDA_Name
 
