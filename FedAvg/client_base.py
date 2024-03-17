@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.utils.data
 import torch.utils.data.distributed
 from torchvision import datasets, transforms
-from torchvision.models import vgg16, resnet18, mobilenet_v2, alexnet
+from torchvision.models import vgg16, resnet18, mobilenet_v2, alexnet, googlenet
 
 #from net import resnet18
 
@@ -125,6 +125,9 @@ class Client:
             model = mobilenet_v2(num_classes=num_classes, pretrained=False).to(device)
         elif modelname =='AlexNet':
             model = alexnet(num_classes=num_classes, pretrained=False).to(device)
+        elif modelname =='GoogleNet':
+            model = googlenet(num_classes=num_classes, pretrained=False).to(device)
+
         #model = resnet18(num_classes=num_classes).to(device)
         # model = vgg16().to(device)
         optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=0.9, weight_decay=1e-4)

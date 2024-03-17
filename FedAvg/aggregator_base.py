@@ -11,7 +11,7 @@ from torchvision import datasets, transforms
 
 import copy
 # from net import resnet18
-from torchvision.models import vgg16, resnet18, mobilenet_v2, alexnet
+from torchvision.models import vgg16, resnet18, mobilenet_v2, alexnet, googlenet
 
 
 class Aggregator:
@@ -87,6 +87,8 @@ class Aggregator:
             model = mobilenet_v2(num_classes=num_classes, pretrained=False).to(device)
         elif modelname =='AlexNet':
             model = alexnet(num_classes=num_classes, pretrained=False).to(device)
+        elif modelname =='GoogleNet':
+            model = googlenet(num_classes=num_classes, pretrained=False).to(device)
         # model = resnet18(num_classes=num_classes).to(device)
         model.load_state_dict(copy.deepcopy(merged))
         metrics = self.__test(model, device, test_loader)
