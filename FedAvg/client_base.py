@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.utils.data
 import torch.utils.data.distributed
 from torchvision import datasets, transforms
-from torchvision.models import vgg11, resnet18, mobilenet_v2, alexnet, googlenet
+from torchvision.models import shufflenet_v2_x2_0, resnet18, mobilenet_v2,
 
 #from net import resnet18
 
@@ -119,14 +119,11 @@ class Client:
 
         if modelname == 'ResNet18':
             model = resnet18(num_classes=num_classes, pretrained=False).to(device)
-        elif modelname == 'VGG11':
-            model = vgg11(num_classes=num_classes, pretrained=False).to(device)
+        elif modelname == 'shufflenet_v2_x2_0':
+            model = shufflenet_v2_x2_0(num_classes=num_classes, pretrained=False).to(device)
         elif modelname == 'MobileNet_v2':
             model = mobilenet_v2(num_classes=num_classes, pretrained=False).to(device)
-        elif modelname =='AlexNet':
-            model = alexnet(num_classes=num_classes, pretrained=False).to(device)
-        elif modelname =='GoogleNet':
-            model = googlenet(num_classes=num_classes, pretrained=False).to(device)
+
 
         #model = resnet18(num_classes=num_classes).to(device)
         # model = vgg16().to(device)
