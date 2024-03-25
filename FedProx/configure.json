@@ -1,0 +1,36 @@
+
+{"//Comment": "Please choose one of templates(CIFAR10, COVID)"}
+
+{
+	"DatasetName": "CIFAR",
+	"User": ["edge1", "edge2", "edge3", "edge4", "edge5", "edge6", "edge7", "edge8", "edge9", "edge10"],
+	"DataCategory": ["0_airplane",  "1_automobile",  "2_bird",  "3_cat",  "4_deer",  "5_dog",  "6_frog",  "7_horse",  "8_ship",  "9_truck"],
+	"DataDistribution": [
+		{"shared":  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
+		{"edge1": [5000, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
+		{"edge2": [0, 5000, 0, 0, 0, 0, 0, 0, 0, 0]},
+		{"edge3": [0, 0, 5000, 0, 0, 0, 0, 0, 0, 0]},
+		{"edge4": [0, 0, 0, 5000, 0, 0, 0, 0, 0, 0]},
+		{"edge5": [0, 0, 0, 0, 5000, 0, 0, 0, 0, 0]},
+		{"edge6": [0, 0, 0, 0, 0, 5000, 0, 0, 0, 0]},
+		{"edge7": [0, 0, 0, 0, 0, 0, 5000, 0, 0, 0]},
+		{"edge8": [0, 0, 0, 0, 0, 0, 0, 5000, 0, 0]},
+		{"edge9": [0, 0, 0, 0, 0, 0, 0, 0, 5000, 0]},
+		{"edge10": [0, 0, 0, 0, 0, 0, 0, 0, 0, 5000]}
+	]
+}
+
+
+
+{
+	"DatasetName": "COVID",
+	"User": ["edge1", "edge2", "edge3", "edge4"],
+	"DataCategory": ["COVID",  "Lung_Opacity",  "Normal",  "VirtualPneumonia"],
+	"DataDistribution": [
+		{"shared":  [0, 0, 0, 0]},
+		{"edge1": [2892, 0, 0, 0]},
+		{"edge2": [0, 4809, 0, 0]},
+		{"edge3": [0, 0, 8153, 0]},
+		{"edge4": [0, 0, 0, 1076]}
+	]
+}
