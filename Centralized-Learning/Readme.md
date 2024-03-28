@@ -8,7 +8,9 @@ rm -rf !(Centralized-Learning)
 mv Centralized-Learning ..
 cd ..
 rm -rf Fed-Clone-Space
-rm result_save/RESULT-SHOULD-PUT-IN-HERE.txt
+rm Centralized-Learning/result_save/RESULT-SHOULD-PUT-IN-HERE.txt
+chmod +x Centralized-Learning/createnew.sh
+chmod +x Centralized-Learning/command.sh
 ```
 
 
@@ -17,9 +19,6 @@ rm result_save/RESULT-SHOULD-PUT-IN-HERE.txt
 check origindata
 nano configure.json
 nano command.sh
-
-chmod +x createnew.sh
-chmod +x command.sh
 
 ./createnew.sh
 ./command.sh

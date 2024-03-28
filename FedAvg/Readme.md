@@ -8,7 +8,9 @@ rm -rf !(FedAvg)
 mv FedAvg ..
 cd ..
 rm -rf Fed-Clone-Space
-rm result_save/RESULT-SHOULD-PUT-IN-HERE.txt
+rm FedAvg/result_save/RESULT-SHOULD-PUT-IN-HERE.txt
+chmod +x FedAvg/createnew.sh
+chmod +x FedAvg/command.sh
 ```
 
 
@@ -17,9 +19,6 @@ rm result_save/RESULT-SHOULD-PUT-IN-HERE.txt
 check origindata
 nano configure.json
 nano command.sh
-
-chmod +x createnew.sh
-chmod +x command.sh
 
 ./createnew.sh
 ./command.sh
