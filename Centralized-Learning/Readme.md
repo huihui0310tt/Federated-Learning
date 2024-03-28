@@ -5,6 +5,10 @@
 git clone --depth 1 --branch main https://github.com/huihui0310tt/Federated-Learning.git --single-branch Fed-Clone-Space
 cd Fed-Clone-Space
 rm -rf !(Centralized-Learning)
+mv Centralized-Learning ..
+cd ..
+rm -rf Fed-Clone-Space
+rm result_save/RESULT-SHOULD-PUT-IN-HERE.txt
 ```
 
 
