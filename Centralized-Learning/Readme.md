@@ -2,8 +2,8 @@
 
 
 ``` bash
-git clone --depth 1 --branch main https://github.com/huihui0310tt/Federated-Learning.git --single-branch Centralized-Learning
-cd Centralized-Learning
+git clone --depth 1 --branch main https://github.com/huihui0310tt/Federated-Learning.git --single-branch Fed-Clone-Space
+cd Fed-Clone-Space
 rm -rf !(Centralized-Learning)
 ```
 

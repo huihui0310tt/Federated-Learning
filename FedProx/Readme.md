@@ -1,4 +1,4 @@
-# Centralized Learning (Traditional Machine Learning)
+# Federated Learning (FedProx)
 
 
 ``` bash

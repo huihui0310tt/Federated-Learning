@@ -1,7 +1,6 @@
 # Federated Learning Simulator
-+ Method: FedAvg
-+ Pending: FedISM (Shared Model + Balanced CSM)
-+ Future: FedProx, FedNova, Scaffold
++ Method: FedAvg, FedProx, FedNova
++ Method: FedISM (Shared Model + Balanced CSM)
 
 # Clone repo
 ```bash

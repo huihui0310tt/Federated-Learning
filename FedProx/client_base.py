@@ -6,7 +6,7 @@ from torchvision import datasets, transforms
 from torchvision.models import shufflenet_v2_x2_0, resnet18, mobilenet_v2
 import copy
 #from net import resnet18
-
+import torch.nn.functional as F
 
 class Client:
     def __init__(self, name):
@@ -26,6 +26,7 @@ class Client:
             optimizer.zero_grad()
             output = model(data)
             # loss = nn.NLLLoss()(output, target)
+            output = F.softmax(output, dim=1)
             loss = nn.CrossEntropyLoss()(output, target)
 
             mu=0.01
@@ -145,14 +146,14 @@ class Client:
 
         global_weight_collector = copy.deepcopy(list(model.to(device).parameters()))
         # scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer, gamma=0.9)
-        scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=7, gamma=0.3)
+        #scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=7, gamma=0.3)
         log_metrics = []
         metrics = {}
         for epoch in range(1, epochs + 1):
             training_loss = self.__train(global_weight_collector, model, device, train_loader, optimizer)
             metrics = self.__test(model, device, test_loader)
             metrics['loss'] = training_loss
-            scheduler.step()
+            #scheduler.step()
             log_metrics.append(metrics)
               
 
