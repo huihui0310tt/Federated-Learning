@@ -26,6 +26,7 @@ class Client:
             optimizer.zero_grad()
             output = model(data)
             # loss = nn.NLLLoss()(output, target)
+            output = F.softmax(output, dim=1)
             loss = nn.CrossEntropyLoss()(output, target)
             loss.backward()
             optimizer.step()

@@ -44,6 +44,7 @@ class Client:
                 data, target = data.to(device), target.to(device)
                 output = model(data)
                 # test_loss += nn.NLLLoss()(output, target)
+                output = F.softmax(output, dim=1)
                 test_loss += nn.CrossEntropyLoss()(output, target)
 
                 pred = output.argmax(
