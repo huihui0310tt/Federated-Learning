@@ -12,7 +12,7 @@ from torchvision import datasets, transforms
 import copy
 # from net import resnet18
 from torchvision.models import shufflenet_v2_x2_0, resnet18, mobilenet_v2
-
+import torch.nn.functional as F
 
 class Aggregator:
 
@@ -24,6 +24,7 @@ class Aggregator:
             for data, target in test_loader:
                 data, target = data.to(device), target.to(device)
                 output = model(data)
+                output = F.softmax(output, dim=1)
                 test_loss += nn.CrossEntropyLoss()(output, target)
 
                 pred = output.argmax(
