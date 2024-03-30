@@ -5,7 +5,7 @@ import torch.utils.data.distributed
 from torchvision import datasets, transforms
 from torchvision.models import shufflenet_v2_x2_0, resnet18, mobilenet_v2
 import copy
-import torch.nn.functional as F
+# import torch.nn.functional as F
 #from net import resnet18
 
 
@@ -29,7 +29,7 @@ class Client:
             optimizer.zero_grad()
             output = model(data)
             # loss = nn.NLLLoss()(output, target)
-            output = F.softmax(output, dim=1)
+            # output = F.softmax(output, dim=1)
             loss = nn.CrossEntropyLoss()(output, target)
             loss.backward()
             optimizer.step()
@@ -49,7 +49,7 @@ class Client:
                 data, target = data.to(device), target.to(device)
                 output = model(data)
                 # test_loss += nn.NLLLoss()(output, target)
-                output = F.softmax(output, dim=1)
+                # output = F.softmax(output, dim=1)
                 test_loss += nn.CrossEntropyLoss()(output, target)
 
                 pred = output.argmax(

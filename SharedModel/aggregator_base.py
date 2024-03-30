@@ -7,7 +7,7 @@ import torch.nn as nn
 import torch.utils.data
 import torch.utils.data.distributed
 from torchvision import datasets, transforms
-import torch.nn.functional as F
+# import torch.nn.functional as F
 
 import copy
 # from net import resnet18
@@ -24,7 +24,7 @@ class Aggregator:
             for data, target in test_loader:
                 data, target = data.to(device), target.to(device)
                 output = model(data)
-                output = F.softmax(output, dim=1)
+                # output = F.softmax(output, dim=1)
                 test_loss += nn.CrossEntropyLoss()(output, target)
 
                 pred = output.argmax(
