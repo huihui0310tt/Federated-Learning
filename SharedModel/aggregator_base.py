@@ -41,7 +41,7 @@ class Aggregator:
         return metrics
 
 
-    def merge(self, clients, modelname, dataset, batch_size, num_classes, no_cuda, gpu_devicename):
+    def merge(self, clients, shared_model, global_model_store, modelname, dataset, batch_size, num_classes, no_cuda, gpu_devicename):
         # weights = [torch.load(m['path'], 'cpu') for m in models]
         weights = [client.model for client in clients]
         
@@ -54,6 +54,14 @@ class Aggregator:
         merged = {}
         for key in weights[0].keys():
             merged[key] = sum([w[key] * f for w, f in zip(weights, factors)])
+
+        if global_model_store == None:
+            for key in weights[0].keys():
+                merged[key] = sum([w[key] *(1/2) for w in [merged, shared_model.model]])
+        else:
+            for key in weights[0].keys():
+                merged[key] = sum([w[key] * f for w, f in zip([merged, shared_model.model, global_model_store], [1/4, 1/2, 1/4])])
+
 
 
         use_cuda = not no_cuda and torch.cuda.is_available()

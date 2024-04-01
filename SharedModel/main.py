@@ -7,6 +7,7 @@ import time
 from datetime import datetime
 import json
 import torch
+import copy
 
 def federated_learning():
     ###################################################################            # Initial
@@ -33,6 +34,7 @@ def federated_learning():
     acc_record = []
     loss_record = []
     best_accuracy = 0
+    global_model_store = None
     
     for round_idx in range(rounds):
         print('----------------------------Now Round ', str(round_idx + 1), '----------------------------')
@@ -58,10 +60,9 @@ def federated_learning():
 
 
         print('---Global model---')
-        clients.append(shared_model)           
 
-        metrics, global_model = aggregator.merge(clients, model, dataset, batch_size, num_classes, no_cuda, gpu_devicename)
-        clients.pop(-1)
+        metrics, global_model = aggregator.merge(clients, shared_model, global_model_store, model, dataset, batch_size, num_classes, no_cuda, gpu_devicename)
+        global_model_store = copy.deepcopy(global_model)
 
         one_round_acc_record.append(metrics['accuracy'])
         one_round_loss_record.append(metrics['loss'])

@@ -149,7 +149,7 @@ class Client:
 
         self.sample = len(training_data)
         if shared_data_train is True:
-            self.model = self.merge(None, model.state_dict())
+            self.model = self.merge(global_model, model.state_dict())
         else:
             self.model = self.merge(global_model, model.state_dict())
         
