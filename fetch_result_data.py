@@ -26,6 +26,8 @@ def get_last_column_of_accuracy_csv_files():
 
         # 篩選出包含指定關鍵字的目錄並進行排序
         filtered_directories = sorted([d for d in directories if all(keyword in d for keyword in keywords)])
+        header_info = ['', 1, '', '', '', 5, '', '', '', '', 10, '', '', '', '', 15, '', '', '', '', 20, '', '', '', '', 25, '', '', '', '', 30, '', '', '', '', 35, '', '', '', '', 40, '', '', '', '', 45, '', '', '', '', 50, '', '', '', '', 55, '', '', '', '', 60, '', '', '', '', 65, '', '', '', '', 70, '', '', '', '', 75, '', '', '', '', 80, '', '', '', '', 85, '', '', '', '', 90, '', '', '', '', 95, '', '', '', '', 100]
+        writer.writerow(header_info)
 
         if filtered_directories:
             print("包含指定關鍵字的目錄有:")
