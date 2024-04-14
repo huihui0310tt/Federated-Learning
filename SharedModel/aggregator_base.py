@@ -55,12 +55,9 @@ class Aggregator:
         for key in weights[0].keys():
             merged[key] = sum([w[key] * f for w, f in zip(weights, factors)])
 
-        if global_model_store == None:
-            for key in weights[0].keys():
-                merged[key] = sum([w[key] *(1/2) for w in [merged, shared_model.model]])
-        else:
-            for key in weights[0].keys():
-                merged[key] = sum([w[key] * f for w, f in zip([merged, shared_model.model, global_model_store], [1/4, 1/2, 1/4])])
+
+        for key in weights[0].keys():
+            merged[key] = sum([w[key] * f for w, f in zip([merged, shared_model.model], [1/2, 1/2])])
 
 
 

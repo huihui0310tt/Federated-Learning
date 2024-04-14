@@ -60,8 +60,9 @@ def federated_learning():
 
 
         print('---Global model---')
-
+        clients.append(shared_model)
         metrics, global_model = aggregator.merge(clients, shared_model, global_model_store, model, dataset, batch_size, num_classes, no_cuda, gpu_devicename)
+        clients.pop(-1)
         global_model_store = copy.deepcopy(global_model)
 
         one_round_acc_record.append(metrics['accuracy'])
