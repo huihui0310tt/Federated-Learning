@@ -1,14 +1,23 @@
 {"//Comment": "Please choose one of templates(CIFAR10, COVID)"}
 
-
 {
 	"DatasetName": "CIFAR",
-	"DataCategory": ["0_airplane",  "1_automobile",  "2_bird",  "3_cat",  "4_deer",  "5_dog",  "6_frog",  "7_horse",  "8_ship",   "9_truck"]
+	"User": ["centralizedlearningdata"],
+	"DataCategory": ["0_airplane",  "1_automobile",  "2_bird",  "3_cat",  "4_deer",  "5_dog",  "6_frog",  "7_horse",  "8_ship",  "9_truck"],
+	"DataDistribution": [
+		{"shared":  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
+		{"centralizedlearningdata": [5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000]}
+	]
 }
 
 
 
 {
 	"DatasetName": "COVID",
-	"DataCategory": ["COVID",  "Lung_Opacity",  "Normal",  "VirtualPneumonia"]
+	"User": ["centralizedlearningdata"],
+	"DataCategory": ["COVID",  "Lung_Opacity",  "Normal",  "VirtualPneumonia"],
+	"DataDistribution": [
+		{"shared":  [0, 0, 0, 0]},
+		{"centralizedlearningdata": [2892, 4809, 8153, 1076]}
+	]
 }

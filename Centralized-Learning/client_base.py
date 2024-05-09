@@ -138,7 +138,7 @@ class Client:
 
         model.train()
 
-        # scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer, gamma=0.9)
+        scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer, gamma=0.9)
         #scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=7, gamma=0.3)
         log_metrics = []
         metrics = {}
@@ -146,7 +146,7 @@ class Client:
             training_loss = self.__train(model, device, train_loader, optimizer)
             metrics = self.__test(model, device, test_loader)
             metrics['loss'] = training_loss
-            #scheduler.step()
+            scheduler.step()
             log_metrics.append(metrics)
             print('epoch: ', str(epoch), end='\t')
             print(metrics)
