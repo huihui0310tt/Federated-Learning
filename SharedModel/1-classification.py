@@ -1,57 +1,79 @@
 import shutil
-from os import listdir
-from os.path import isfile, isdir, join
+from os import listdir, makedirs
+from os.path import isdir, join
 import json
 
-
+# 讀取配置檔案
 file_path = 'configure.json'
-json_data = None
-sample = []
 with open(file_path, 'r') as file:
     json_data = json.load(file)
-des = None
-label = None
 
+# 提取配置信息
+dataset_name = json_data['DatasetName']
+users = json_data['User']
+labels = json_data['DataCategory']
+data_distribution = json_data['DataDistribution']
 
+# 建立用戶到分配數據的映射
+user_distribution_map = {}
+for dist in data_distribution:
+    for key, value in dist.items():
+        user_distribution_map[key] = value
 
-des = json_data['User']
-label = json_data['DataCategory']
-datadistribution = json_data['DataDistribution']
-shared_data        = datadistribution[0]['shared']
-# client1_samplesize = [726,  	1195,	2019,	269]
-# client2_samplesize = [717, 	1202,  	2045,  	268]
-# client3_samplesize = [714,  	1217,   2063,   268]
-# client4_samplesize = [735, 	1195,  	2026,  	271]
-DatasetName = json_data['DatasetName']
-# DatasetName = 'CIFAR' or 'COVID'
-if DatasetName == 'CIFAR': 
+# 找到 'shared' 的分配數據
+shared_data = user_distribution_map.get("shared", None)
+if shared_data is None:
+    raise ValueError("配置中缺少 'shared' 數據")
+
+# 設定原始資料和共享資料的路徑
+if dataset_name == 'CIFAR':
     src = '../CIFAR_origindata'
-elif DatasetName == 'COVID':
+elif dataset_name == 'COVID':
     src = '../COVID_origindata'
-#src = "./origindata"
-shared = "./data/shared"
+else:
+    raise ValueError("未知的數據集名稱")
 
+shared_path = "./data/shared"
 
-for index in range(len(des)):
-    sample.append(datadistribution[index+1][des[index]])
+# 確保共享資料夾和目標目錄存在
+if not isdir(shared_path):
+    makedirs(shared_path)
 
-for label_idx in range(len(label)):
-    pass
-    count = 1
-    for one_src_file in listdir(join(src, label[label_idx])) :
-        if count <= shared_data[label_idx] :
-            #print(str(join(src, label[label_idx], one_src_file)), str(join(shared, label[label_idx], one_src_file)))
-            shutil.copy(join(src, label[label_idx], one_src_file), join(shared, label[label_idx], one_src_file))
+for label in labels:
+    label_path = join(shared_path, label)
+    if not isdir(label_path):
+        makedirs(label_path)
 
-        else:
-            temp = shared_data[label_idx]
-            for client_idx in range(len(sample)) :
-                temp += sample[client_idx][label_idx]
-                if count <= temp:
-                    #print(str(join(src, label[label_idx], one_src_file)), str(join("./data",des[client_idx], label[label_idx])))
-                    shutil.copy(join(src, label[label_idx], one_src_file), join("./data", des[client_idx], label[label_idx]))
-                    break
-        count+=1
+# 將共享資料複製到共享資料夾
+for label_idx, label_name in enumerate(labels):
+    count = 0
+    for file_name in listdir(join(src, label_name)):
+        if count < shared_data[label_idx]:
+            shutil.copy(join(src, label_name, file_name), join(shared_path, label_name, file_name))
+            count += 1
 
+# 確保每個用戶的資料夾存在
+for user in users:
+    user_path = join("./data", user)
+    if not isdir(user_path):
+        makedirs(user_path)
+    for label_name in labels:
+        label_path = join(user_path, label_name)
+        if not isdir(label_path):
+            makedirs(label_path)
 
-
+# 分配剩餘資料給每個用戶
+for label_idx, label_name in enumerate(labels):
+    count = shared_data[label_idx]
+    for file_name in listdir(join(src, label_name)):
+        temp = shared_data[label_idx]
+        # 確保用戶在 user_distribution_map 中存在
+        for user_idx, user in enumerate(users):
+            if user not in user_distribution_map:
+                continue  # 跳過沒有分配數據的用戶
+            user_dist = user_distribution_map[user]
+            temp += user_dist[label_idx]
+            if count < temp:
+                shutil.copy(join(src, label_name, file_name), join("./data", user, label_name, file_name))
+                count += 1
+                break
