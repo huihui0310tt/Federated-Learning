@@ -49,7 +49,7 @@ class Aggregator:
         total_data_size = sum(client.sample for client in clients)
 
         # factors = [m['size'] / total_data_size for m in models]
-        factors = [client.sample/total_data_size for client in clients]
+        factors = [1/len(clients) for client in clients]
 
         merged = {}
         for key in weights[0].keys():

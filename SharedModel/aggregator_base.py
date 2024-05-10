@@ -56,8 +56,8 @@ class Aggregator:
             merged[key] = sum([w[key] * f for w, f in zip(weights, factors)])
 
 
-        for key in weights[0].keys():
-            merged[key] = sum([w[key] * f for w, f in zip([merged, shared_model.model], [1/2, 1/2])])
+        #for key in weights[0].keys():
+        #    merged[key] = sum([w[key] * f for w, f in zip([merged, shared_model.model], [1/2, 1/2])])
 
 
 
